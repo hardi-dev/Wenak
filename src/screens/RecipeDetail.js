@@ -8,7 +8,8 @@ import * as vars from './../styles/vars';
 import { loadHTML } from './../helper/scraper';
 
 
-
+import Wrapper from './../components/wrapper';
+import { AdsBanner } from './../components/Ads';
 
 export default class RecipeDetail extends Component {
 
@@ -73,35 +74,44 @@ export default class RecipeDetail extends Component {
     }
 
     return(
-      <ScrollView>
+      <Wrapper>
+        <View style={styles.contentHolder}>
+          
+          <ScrollView>
 
-        <View style={styles.titleContainer}>
-          <Image style={styles.hero}source={{uri: navigation.getParam('thumb')}}/>
-          <Text style={styles.title}> { navigation.getParam('title') } </Text>
+            <View style={styles.titleContainer}>
+              <Image style={styles.hero}source={{uri: navigation.getParam('thumb')}}/>
+              <Text style={styles.title}> { navigation.getParam('title') } </Text>
+            </View>
+
+            <View style={styles.bannerHolder}>
+              <AdsBanner />
+            </View>
+
+            <View style={styles.container}>
+              <HTML
+                tagsStyles={{ 
+                  body: {fontSize: 20}, 
+                  h2: { fontFamily: vars.fontsPrimary.regular},
+                  p: {fontSize: 16, fontFamily: vars.fontsPrimary.regular}, 
+                  strong: {fontSize: 20,}, 
+                  blockquote: {fontSize: 16}, 
+                  a: {fontSize:16, color: "#000"}, 
+                  em: {fontSize: 16,}, 
+                  img: {height: 250, width: 350},
+                  li: { fontFamily: vars.fontsPrimary.regular, fontSize: 16},
+
+                }}
+                imagesInitialDimensions={{ width: imgWidth, height: imgWidth }}
+                styleName="paper md-gutter multiline" 
+                html={ this.state.data }
+                imagesMaxWidth={Dimensions.get('window').width} 
+                ignoredStyles={['width', 'height', 'video', 'display']}
+                onLinkPress={(evt, href) => this._onLinkPress(href)}/>
+            </View>
+          </ScrollView>
         </View>
-
-        <View style={styles.container}>
-          <HTML
-            tagsStyles={{ 
-              body: {fontSize: 20}, 
-              h2: { fontFamily: vars.fontsPrimary.regular},
-              p: {fontSize: 16, fontFamily: vars.fontsPrimary.regular}, 
-              strong: {fontSize: 20,}, 
-              blockquote: {fontSize: 16}, 
-              a: {fontSize:16, color: "#000"}, 
-              em: {fontSize: 16,}, 
-              img: {height: 250, width: 350},
-              li: { fontFamily: vars.fontsPrimary.regular, fontSize: 16},
-
-            }}
-            imagesInitialDimensions={{ width: imgWidth, height: imgWidth }}
-            styleName="paper md-gutter multiline" 
-            html={ this.state.data }
-            imagesMaxWidth={Dimensions.get('window').width} 
-            ignoredStyles={['width', 'height', 'video', 'display']}
-            onLinkPress={(evt, href) => this._onLinkPress(href)}/>
-        </View>
-      </ScrollView>
+      </Wrapper>
     )
   }
 }
@@ -148,5 +158,17 @@ const styles = new StyleSheet.create({
   },
   img : {
     width: imgWidth
+  },
+  contentHolder: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 140,
+  },
+  bannerHolder: {
+    display: 'flex',
+    width: Dimensions.get('window').width,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: vars.spacings.m
   }
 })

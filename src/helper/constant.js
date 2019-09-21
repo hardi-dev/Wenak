@@ -9,6 +9,7 @@ export const ARCHIVE_URL = {
 }
 
 export const ADMOB = {
-  banner: 'ca-app-pub-3940256099942544/6300978111',
+  // testBanner: 'ca-app-pub-3940256099942544/6300978111',
+  banner: 'ca-app-pub-8103587568457379/2741206074',
   Interstitial: 'ca-app-pub-3940256099942544/1033173712',
 }

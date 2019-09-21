@@ -6,7 +6,9 @@ import {
   ActivityIndicator,
   ScrollView,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  View,
+  Dimensions
 } from 'react-native';
 
 import RecipeListItem from './../components/RecipeListItem';
@@ -103,25 +105,27 @@ export default class RecipeArchive extends Component{
 
     return(
       <Wrapper>
-        <ScrollView
-          scrollEventThrottle={20}
-          onScroll={({nativeEvent}) => {
-            if(isCloseToBottom(nativeEvent)){
-                this._handleEndOfScroll();
-            }
-          }}>
-          <FlatList 
-            style={styles.listContainer}
-            data={ this.state.postList }
-            renderItem={({ item, index }) => (
-              <RecipeListItem data={ item } navigation={navigation}/>
-            )}
-          />
+        <View style={styles.contentHolder}>
+          <ScrollView
+            scrollEventThrottle={20}
+            onScroll={({nativeEvent}) => {
+              if(isCloseToBottom(nativeEvent)){
+                  this._handleEndOfScroll();
+              }
+            }}>
+            <FlatList 
+              style={styles.listContainer}
+              data={ this.state.postList }
+              renderItem={({ item, index }) => (
+                <RecipeListItem data={ item } navigation={navigation}/>
+              )}
+            />
 
-          {
-            this.state.isLoadMore && <ActivityIndicator size="small"/>
-          }
-        </ScrollView>
+            {
+              this.state.isLoadMore && <ActivityIndicator size="small"/>
+            }
+          </ScrollView>
+        </View>
       </Wrapper>
     )
   }
@@ -129,6 +133,10 @@ export default class RecipeArchive extends Component{
 
 const styles = new StyleSheet.create({
   listContainer: {
-    paddingVertical: vars.spacings.l,
-  }
+    paddingTop: vars.spacings.l,
+  },
+  contentHolder: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 140,
+  },
 })

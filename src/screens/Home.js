@@ -3,7 +3,10 @@ import {
   SafeAreaView,
   Text,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
+  View,
+  StyleSheet,
+  Dimensions
 } from 'react-native';
 
 import Wrapper from './../components/wrapper';
@@ -13,12 +16,7 @@ import * as vars from './../styles/vars';
 
 import RecipeHorizontalList from '../components/RecipeHorizontalList';
 
-import firebase from 'react-native-firebase';
-
-// firebase.admob().initialize(ADMOB.banner);
-const Banner = firebase.admob.Banner;
-const AdRequest = firebase.admob.AdRequest;
-const request = new AdRequest();
+import { AdsBanner } from './../components/Ads';
 
 
 export default class Home extends Component{
@@ -95,16 +93,8 @@ export default class Home extends Component{
     }
     return(
       <Wrapper>
+        <View style={styles.contentHolder}>
         <ScrollView>
-          <Banner 
-            unitId={ADMOB.banner}
-            request={request.build()}
-            onAdLoaded={() => {
-              console.log('add loaded');
-            }}
-            />
-
-
           <RecipeHorizontalList 
             title="Resep Daging" 
             data={this.state.resepDaging}
@@ -135,7 +125,15 @@ export default class Home extends Component{
             slug="kue"
             navigation={navigation}/>            
         </ScrollView>
+        </View>
       </Wrapper>
     )
   }
 }
+
+const styles = new StyleSheet.create({
+  contentHolder: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 140,
+  },
+})
