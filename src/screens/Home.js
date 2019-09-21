@@ -7,11 +7,18 @@ import {
 } from 'react-native';
 
 import Wrapper from './../components/wrapper';
-import { WEB_URL } from './../helper/constant';
+import { WEB_URL, ADMOB } from './../helper/constant';
 import { loadHTML } from './../helper/scraper';
 import * as vars from './../styles/vars';
 
 import RecipeHorizontalList from '../components/RecipeHorizontalList';
+
+import firebase from 'react-native-firebase';
+
+// firebase.admob().initialize(ADMOB.banner);
+const Banner = firebase.admob.Banner;
+const AdRequest = firebase.admob.AdRequest;
+const request = new AdRequest();
 
 
 export default class Home extends Component{
@@ -89,6 +96,15 @@ export default class Home extends Component{
     return(
       <Wrapper>
         <ScrollView>
+          <Banner 
+            unitId={ADMOB.banner}
+            request={request.build()}
+            onAdLoaded={() => {
+              console.log('add loaded');
+            }}
+            />
+
+
           <RecipeHorizontalList 
             title="Resep Daging" 
             data={this.state.resepDaging}

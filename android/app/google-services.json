@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "729644299545",
+    "firebase_url": "https://wenak-22ddd.firebaseio.com",
+    "project_id": "wenak-22ddd",
+    "storage_bucket": "wenak-22ddd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729644299545:android:d00cc4cf8197fa231f0188",
+        "android_client_info": {
+          "package_name": "com.wenak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729644299545-bo0h81tkatfcb1t0oo6fr1v2leg23ge5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlxhKwNeTZDelR08rzdxVTBPJreKmsYYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729644299545-bo0h81tkatfcb1t0oo6fr1v2leg23ge5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
